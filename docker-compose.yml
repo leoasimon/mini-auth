@@ -1,0 +1,23 @@
+services:
+  api:
+    image: mini-auth-api
+    ports:
+      - 3000:3000
+    env_file:
+      - ./api/.env.dev
+    volumes:
+      - ./api/src:/app/src
+    
+  client:
+    image: mini-auth-client
+    ports:
+      - 8080:8080
+    volumes:
+      - ./client/src:/app/src
+
+  db:
+    image: postgres:latest
+    env_file:
+      - ./client/.env.dev
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
