@@ -1,6 +1,6 @@
 services:
   api:
-    image: mini-auth-api
+    build: ./api
     ports:
       - 3000:3000
     env_file:
@@ -9,7 +9,7 @@ services:
       - ./api/src:/app/src
     
   client:
-    image: mini-auth-client
+    build: ./client
     ports:
       - 8080:8080
     volumes:
@@ -17,12 +17,15 @@ services:
     env_file:
       - ./client/.env.dev
 
-
   db:
     image: postgres:latest
+    restart: always
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_USER: admin
       POSTGRES_DB: mini-auth
+    ports:
+      - 5432:5432
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
