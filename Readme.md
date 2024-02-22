@@ -22,5 +22,9 @@ For Windows and MacOs users, **Docker engine** must be installed and running
 ### Usage
 Start the application and watch for changes in:
 
-    make dev
+    docker compose up
+
+Stop the application
+
+    docker compose down
 
